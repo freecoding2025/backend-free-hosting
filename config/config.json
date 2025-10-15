@@ -16,12 +16,8 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "uu6g2aelxmesk6zd",
-    "password": "HGch3MxW09lOylzwzsaf",
-    "database": "bqanbanr6azvfhp9hmer",
-    "host": "bqanbanr6azvfhp9hmer-mysql.services.clever-cloud.com",
+    "use_env_variable": "mysql://uu6g2aelxmesk6zd:HGch3MxW09lOylzwzsaf@bqanbanr6azvfhp9hmer-mysql.services.clever-cloud.com:3306/bqanbanr6azvfhp9hmer",
     "dialect": "mysql",
-    "logging": false,
-    "port": 3306
+    "logging": false
   }
 }
