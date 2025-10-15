@@ -16,10 +16,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "uqmnwprk8thd3xn5",
-    "password": "KkipdHZbm6Y2ngxc47iv",
-    "database": "buuc8suvj7oot7qkuzn6",
-    "host": "buuc8suvj7oot7qkuzn6-mysql.services.clever-cloud.com",
+    "username": "uu6g2aelxmesk6zd",
+    "password": "HGch3MxW09lOylzwzsaf",
+    "database": "bqanbanr6azvfhp9hmer",
+    "host": "bqanbanr6azvfhp9hmer-mysql.services.clever-cloud.com",
     "dialect": "mysql",
     "logging": false,
     "port": 3306
