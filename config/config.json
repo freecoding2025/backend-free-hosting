@@ -1,0 +1,27 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "test_db",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "logging": false,
+    "port": 4306
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "school_management_system",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "uqmnwprk8thd3xn5",
+    "password": "KkipdHZbm6Y2ngxc47iv",
+    "database": "buuc8suvj7oot7qkuzn6",
+    "host": "buuc8suvj7oot7qkuzn6-mysql.services.clever-cloud.com",
+    "dialect": "mysql",
+    "logging": false,
+    "port": 3306
+  }
+}
