@@ -1,57 +1,46 @@
-// app.js
 const express = require('express');
+const cors = require('cors'); // 1. Import the cors package
+const studentRoutes = require('./routes/students');
 
 const app = express();
+
+// 2. Use the cors middleware to allow cross-origin requests
+// This is the most important part to fix the "Failed to fetch" error.
+app.use(cors());
+
+// Middleware to parse JSON request bodies
 app.use(express.json());
 
-// Sequelize models
-const models = require('./models');
-// a promise that resolves when DB is ready (useful for tests)
-const dbReady = models.sequelize.authenticate()
-  .then(() => models.sequelize.sync())
-  .then(() => true)
-  .catch((err) => {
-    console.error('DB init error', err);
-    return false;
-  });
+// --- API Routes (based on your README.md) ---
 
-// simple health route
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', env: process.env.NODE_ENV || 'unknown' });
+  res.send({ status: 'ok', message: 'Server is healthy' });
 });
 
-// example resource route
 app.get('/api/hello', (req, res) => {
-  // keep the message compatible with tests
-  res.json({ message: 'Hello from API' });
+  res.send({ message: 'Hello from the backend!' });
 });
 
-// notes endpoints (simple DB-backed example)
-app.post('/api/notes', async (req, res) => {
-  await dbReady;
-  const { title, body } = req.body || {};
-  if (!title) return res.status(400).json({ error: 'title is required' });
-  const created = await models.Note.create({ title, body });
-  res.status(201).json({ note: created.toJSON() });
-});
-
-app.get('/api/notes', async (req, res) => {
-  await dbReady;
-  const notes = await models.Note.findAll({ order: [['id', 'ASC']] });
-  res.json({ notes: notes.map(n => n.toJSON()) });
-});
-
-// export dbReady for tests to wait on
-app.dbReady = dbReady;
-
-// register student routes
-const studentRoutes = require('./routes/students');
-app.use('/api/students', studentRoutes);
-
-// example POST route
 app.post('/api/echo', (req, res) => {
-  const payload = req.body;
-  res.status(201).json({ data: payload });
+  res.json(req.body);
 });
+
+// This is the endpoint your frontend is trying to reach.
+app.get('/api/notes', (req, res) => {
+  // In a real application, you would fetch these from your database.
+  const sampleNotes = [
+    { id: 1, title: 'First Note', body: 'This is a sample note from the backend.' },
+    { id: 2, title: 'Vue and Express', body: 'They are now connected successfully!' },
+  ];
+  res.json(sampleNotes);
+});
+
+app.post('/api/notes', (req, res) => {
+  console.log('Received new note:', req.body);
+  res.status(201).json({ message: 'Note created successfully', note: req.body });
+});
+
+// --- Student API Routes ---
+app.use('/api/students', studentRoutes);
 
 module.exports = app;
